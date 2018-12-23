@@ -8,19 +8,44 @@
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var $body = $("body");
+        $body.html("");
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
+        var title = "twiddler";
+        var $title = $("<h1></h1>");
+        $title.text(title);
+        $title.appendTo($body);
+
+        var comingSoon = "COMING SOON!";
+        var $comingSoon = $("<h2></h2>");
+        $comingSoon.text(comingSoon);
+        $comingSoon.appendTo($body);
+
+        $("h1").css({"font-size": "200px", "letter-spacing": "7px", "text-align": "center", "position": "absolute", "left": "700px", "overflow": "hidden"});
+        $("h2").css({"font-size": "50px", "text-align": "center", "letter-spacing": "3px", "position": "absolute", "left": "700px", "top": "350px"});
+        $("body").css({"background-color": "hsla(31, 100%, 62%, 1)", "font-family": "Impact", "color": "hsla(0, 0%, 31%, 1)"});
+
+        var index = streams.home.length - 1;              
+        //the following function was taken from the following URL: https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop
+        function delayedLoop () {
+          setTimeout(function () {
+            var tweet = streams.home[index];
+            var $tweet = $("<div></div>");
+            $tweet.text("-@" + tweet.user + ": " + tweet.message + "-- POSTED: " + Date($.now()) + "\n\n");
+            $tweet.appendTo($body);
+            $("div").css({"background-color": "hsla(31, 100%, 45%, 1)", "width": "500px", "word-spacing": "3px", "padding": "10px"});
+            index--;
+            if (index >= 0) { 
+              delayedLoop(); 
+            } 
+          }, Math.random() * 5000);
         }
 
+        delayedLoop();
+
       });
+
+      
 
     </script>
   </body>
