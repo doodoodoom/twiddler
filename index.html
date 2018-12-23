@@ -31,9 +31,13 @@
           setTimeout(function () {
             var tweet = streams.home[index];
             var $tweet = $("<div></div>");
-            $tweet.text("-@" + tweet.user + ": " + tweet.message + "-- POSTED: " + Date($.now()) + "\n\n");
+            var text = ": " + tweet.message + " -- POSTED: " + tweet.created_at;
+            
+            $tweet.html("-@<a href='" + tweet.user + ".html'>" + tweet.user + "</a>" + text);
             $tweet.appendTo($body);
-            $("div").css({"background-color": "hsla(31, 100%, 45%, 1)", "width": "500px", "word-spacing": "3px", "padding": "10px"});
+
+            $("div").css({"background-color": "hsla(31, 100%, 45%, 1)", "width": "500px", "word-spacing": "3px", "letter-spacing": "0.8px", "padding": "10px"});
+
             index--;
             if (index >= 0) { 
               delayedLoop(); 
@@ -42,6 +46,22 @@
         }
 
         delayedLoop();
+
+        
+
+        /*var displayFeed = function() {
+          for (var x = 0; x < streams.users[tweet.user].length; x++){
+            var usersTweet = streams.user[tweet.user][x];
+            var $usersTweet = $("<user></user>");
+            var usersTweetText = "-@:" + usersTweet.user + ": " + usersTweet.message + " -- POSTED: " + Date($.now());
+            $usersTweet.text(usersTweetText);
+            $usersTweet.appendTo($body);
+            $("user").css({"text-align": "right"});
+          }
+        };*/
+
+        
+
 
       });
 
